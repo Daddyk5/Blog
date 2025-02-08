@@ -1,13 +1,28 @@
-@extends('layouts.app')
+<!-- resources/views/styling.blade.php -->
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<div class="container mx-auto mt-8">
-    <div class="p-6 bg-white shadow-md rounded-lg text-center">
-        <h1 class="text-4xl font-bold text-blue-500">Styling with Tailwind CSS</h1>
-        <p class="mt-4 text-gray-600 text-lg">This is a styled card component using Tailwind CSS.</p>
-        <button class="mt-6 bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
-            Click Me
-        </button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Styling Page in Laravel">
+    <meta name="author" content="Your Name">
+    <title>Styling View</title>
+
+    <!-- Laravel Blade CSS Example -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    <!-- TailwindCSS or Bootstrap (Optional) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 text-center flex items-center justify-center min-h-screen">
+
+    <div class="p-6 bg-white shadow-lg rounded-lg">
+        <h1 class="text-3xl font-bold text-blue-600">Styling View Loaded Successfully</h1>
     </div>
-</div>
-@endsection
+
+</body>
+
+</html>
