@@ -30,9 +30,16 @@
         @endisset
 
         <!-- Page Content -->
-        <main class="py-8">
-            @yield('content') <!-- This ensures content is correctly injected -->
+        <main class="container mx-auto p-6">
+            @yield('content')
         </main>
+
+        <!-- Footer -->
+        <footer class="bg-white shadow mt-10">
+            <div class="max-w-7xl mx-auto py-4 px-6 text-center text-gray-600">
+                &copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
+            </div>
+        </footer>
     </div>
 </body>
 

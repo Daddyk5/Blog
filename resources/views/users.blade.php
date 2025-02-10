@@ -12,14 +12,23 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($users as $user)
+            @forelse ($users as $user)
                 <tr>
                     <td class="border px-4 py-2">{{ $user->id }}</td>
                     <td class="border px-4 py-2">{{ $user->name }}</td>
                     <td class="border px-4 py-2">{{ $user->email }}</td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="3" class="text-center border px-4 py-2">No Users Found</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
+
+    <!-- Pagination -->
+    <div class="mt-4">
+        {{ $users->links() }}
+    </div>
 </div>
 @endsection

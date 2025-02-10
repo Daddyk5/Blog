@@ -2,19 +2,17 @@
 
 @section('content')
 <div class="container mx-auto mt-8">
-    <figure class="text-center">
-        <img src="{{ asset('images/sample1.jpg') }}" alt="Sample Image 1" class="mx-auto">
-        <figcaption class="text-gray-600 mt-2">Sample Image 1</figcaption>
-    </figure>
+    <h2 class="text-2xl font-bold text-center">Media Gallery</h2>
 
-    <figure class="text-center mt-6">
-        <img src="{{ asset('images/sample2.jpg') }}" alt="Sample Image 2" class="mx-auto">
-        <figcaption class="text-gray-600 mt-2">Sample Image 2</figcaption>
-    </figure>
-
-    <figure class="text-center mt-6">
-        <img src="{{ asset('images/sample3.jpg') }}" alt="Sample Image 3" class="mx-auto">
-        <figcaption class="text-gray-600 mt-2">Sample Image 3</figcaption>
-    </figure>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        @foreach (['sample1.jpg', 'sample2.jpg', 'sample3.jpg'] as $image)
+            <figure class="text-center bg-white p-4 shadow rounded-lg">
+                <img src="{{ asset('images/' . $image) }}"
+                    onerror="this.onerror=null; this.src='{{ asset('images/no-image.png') }}';" alt="Sample Image"
+                    class="mx-auto h-64 w-auto object-cover rounded">
+                <figcaption class="text-gray-600 mt-2">{{ ucfirst(str_replace('.jpg', '', $image)) }}</figcaption>
+            </figure>
+        @endforeach
+    </div>
 </div>
 @endsection

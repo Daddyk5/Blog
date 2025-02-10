@@ -15,26 +15,38 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('services')" :active="request()->routeIs('services')">
+                        {{ __('Services') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
+                        {{ __('Contact Us') }}
+                    </x-nav-link>
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
-            @if(Auth::check()) <!-- Ensure user is logged in -->
-                <div class="hidden sm:flex sm:items-center sm:ms-6">
-                    <x-dropdown align="right" width="48">
-                        <x-slot name="trigger">
-                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                <div>{{ Auth::user()->name }}</div>
+            <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <x-dropdown align="right" width="48">
+                    <x-slot name="trigger">
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            <div>
+                                @if (Auth::check())
+                                    {{ Auth::user()->name }}
+                                @else
+                                    Guest
+                                @endif
+                            </div>
 
-                                <div class="ms-1">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </button>
-                        </x-slot>
+                            <div class="ms-1">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </button>
+                    </x-slot>
 
-                        <x-slot name="content">
+                    <x-slot name="content">
+                        @if (Auth::check())
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
@@ -48,10 +60,17 @@
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form>
-                        </x-slot>
-                    </x-dropdown>
-                </div>
-            @endif
+                        @else
+                            <x-dropdown-link :href="route('login')">
+                                {{ __('Login') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('register')">
+                                {{ __('Register') }}
+                            </x-dropdown-link>
+                        @endif
+                    </x-slot>
+                </x-dropdown>
+            </div>
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
@@ -71,17 +90,28 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('services')" :active="request()->routeIs('services')">
+                {{ __('Services') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
+                {{ __('Contact Us') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
-        @if(Auth::check()) <!-- Ensure user is logged in -->
-            <div class="pt-4 pb-1 border-t border-gray-200">
-                <div class="px-4">
+        <div class="pt-4 pb-1 border-t border-gray-200">
+            <div class="px-4">
+                @if (Auth::check())
                     <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                     <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-                </div>
+                @else
+                    <div class="font-medium text-base text-gray-800">Guest</div>
+                    <div class="font-medium text-sm text-gray-500">Not Logged In</div>
+                @endif
+            </div>
 
-                <div class="mt-3 space-y-1">
+            <div class="mt-3 space-y-1">
+                @if (Auth::check())
                     <x-responsive-nav-link :href="route('profile.edit')">
                         {{ __('Profile') }}
                     </x-responsive-nav-link>
@@ -95,8 +125,15 @@
                             {{ __('Log Out') }}
                         </x-responsive-nav-link>
                     </form>
-                </div>
+                @else
+                    <x-responsive-nav-link :href="route('login')">
+                        {{ __('Login') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('register')">
+                        {{ __('Register') }}
+                    </x-responsive-nav-link>
+                @endif
             </div>
-        @endif
+        </div>
     </div>
 </nav>
